@@ -17,6 +17,9 @@ Pure q implementation to map character strings between local encoding and UTF-8.
 
 .io.sys_in  any_q_obj    /all occurrences of strings/symbols will be decoded from system default encoding to UTF-8
 .io.sys_out any_q_obj    /all occurrences of strings/symbols will be encoded from UTF-8 to system default encoding
+
+.io.sys_in ("DSF*";(),csv)0:`:exported_from_Excel.csv
+`:import_to_Excel.csv 0:csv 0:.io.sys_out q_table
 ```
 
 ## Charmaps
@@ -31,7 +34,7 @@ This library supports the following encodings for now:
 
 ### Generating a charmap
 
-Take the `gb18030` as an example.
+Take the `gb18030` encoding as an example.
 
 The [`Uncode_GB18030.q`](./Unicode_GB18030.q) script converts the [raw GB18030 codepoint file](./Unicode_GB18030.txt) into [`gb18030.charmap`](./gb18030.charmap) data file, which is loaded by [`charmap.q`](./charmap.q) at runtime when necessary.
 
