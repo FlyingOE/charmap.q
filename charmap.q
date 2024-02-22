@@ -165,7 +165,7 @@
   :$[ 0h=t:type x ;.z.s[map;tok;] each x
    ; 10h=t  ;.text.xcode.str[map;tok;] x
    ;-11h=t  ;`$.text.xcode.str[map;tok;] string x
-   ; 11h=t  ;.Q.fu[`$.text.xcode.str[map;tok;] string@;] x
+   ; 11h=t  ;.Q.fu[`$.text.xcode.str[map;tok;]peach string@;] x
    ; 99h=t  ;(key x)!.z.s[map;tok;] value x
    ; 98h=t  ;flip .z.s[map;tok;]peach flip x
    ;x ];
