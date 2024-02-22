@@ -45,14 +45,15 @@
 
 / Guess the encoding from a codepage or an encoding name
 .text.getEnc:{
-  :first ?[.text.CODEPAGES;;();(^;`enc;`actual)]
+  enc:first ?[.text.CODEPAGES;;();(^;`enc;`actual)]
     enlist$[
        10h=t:type x  ;(like;`enc;lower x)
      ;-11h=t         ;(like;`enc;lower string x)
      ;t in -5 -6 -7h ;(=;`cp;x)
-     ;'"nyi: codepage ",string[x] ];
+     ;'"nyi: codepage ",string x ];
+  :$[null enc ;`$$[10h=t;x;string x] ;enc ];
  };
- 
+
 / Encode a Unicode codepoint into a UTF-8 byte sequence
 .text.toUTF8:{
   cp:"i"$0x0 sv -8#(7#0x00),$[4h=type(),x;(),x;0x0 vs x]; //Unicode codepoint
@@ -83,7 +84,7 @@
   enc:.text.getEnc cp_enc;
   if[enc~`utf8; :x ];
   tok:.text.TOKENIZER enc;
-  if[(::)~tok; '"nyi: no tokenizer for ",upper string enc ];
+  if[(::)~tok; '"nyi: no tokenizer for ",string enc ];
   map:{[m;e;c] $[""~r:m c;e c;r] }[
     .text.map.get[enc;`utf8]
    ;$[err~`ignore ;{""}
