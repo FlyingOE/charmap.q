@@ -9,18 +9,19 @@
 \d .io
 
 / System default codepage
-.io.DEFAULT_CP:$[
-  .z.o like"w*"
-   ;{ enc:system"powershell -Command \"[System.Text.Encoding]::Default\" ";
-      :"I"$trim last ":"vs first enc where enc like"WindowsCodePage *";
-     }[]
- ;.z.o like"l*"
-   ;{ loc:system"locale charmap";
-     :`$lower ssr[;"-";""] first loc; 
-     }[]
- /;.z.o like"..."
-   ;'"nyi: add support for ",.Q.s1 .z.o;
- ];
+.io.DEFAULT_CP:{
+  :$[.z.o like"w*"
+      ;{ enc:system"powershell -Command \"[System.Text.Encoding]::Default\" ";
+        :"I"$trim last ":"vs first enc where enc like"WindowsCodePage *";
+       }[]
+    ;.z.o like"l*"
+      ;{ loc:system"locale charmap";
+        :`$lower ssr[;"-";""] first loc;
+       }[]
+    /;.z.o like"..."
+      ;'"nyi: add support for ",.Q.s1 .z.o;
+   ];
+ }[];
 
 / Convert input from system to UTF-8
 .io.sys_in: { .text.decode[.text.getEnc .io.DEFAULT_CP;`replace;x] };
